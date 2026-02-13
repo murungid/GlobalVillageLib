@@ -1,0 +1,40 @@
+{% extends 'books/home.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Book List</h2>
+        <a href="{% url 'book_create' %}" class="btn btn-primary">Add New Book</a>
+    </div>
+
+    {% if books %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Year</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.authors_name }}</td>
+                <td>{{ book.publication_year }}</td>
+                <td>
+                    <a href="{% url 'book_detail' book.pk %}" class="btn btn-sm btn-info">View</a>
+                    <a href="{% url 'book_update' book.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{% url 'book_delete' book.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p>Total Books: {{ total }}</p>
+    {% else %}
+    <p>No books available.</p>
+    {% endif %}
+</div>
+{% endblock %}

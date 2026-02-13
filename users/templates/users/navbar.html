@@ -1,0 +1,81 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+  <div class="container">
+
+    <!-- Brand -->
+    <a class="navbar-brand fw-bold text-dark" href="#">
+      📚 GlobalVillageLib
+    </a>
+
+    <!-- Mobile Toggle -->
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Links -->
+    <div class="collapse navbar-collapse" id="navbarContent">
+
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+
+        {% if user.is_authenticated %}
+
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="{% url 'home' %}">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="{% url 'book_list' %}">Books</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="{% url 'book_create' %}">Create Book</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="{% url 'create_categories' %}">Create Category</a>
+        </li>
+
+
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="{% url 'create_member' %}">Members</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="#">Issued</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown">
+            {{ user.username }}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+            <li>
+              <a class="dropdown-item" href="#">Profile</a>
+            </li>
+            <li>
+              <form method="POST" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="dropdown-item text-danger">
+                  Logout
+                </button>
+              </form>
+            </li>
+          </ul>
+        </li>
+
+        {% else %}
+
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="{% url 'login' %}">Login</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="btn btn-dark px-4 rounded-pill" href="{% url 'register' %}">
+            Register
+          </a>
+        </li>
+
+        {% endif %}
+
+      </ul>
+
+    </div>
+  </div>
+</nav>

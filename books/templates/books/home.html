@@ -1,0 +1,17 @@
+{% extends 'users/base.html' %}
+{% block content %}
+<h1>Book List</h1>
+{% if books %}
+<ul>
+    {% for book in books %}
+    <li>{{ book.title }} by
+        {% for author in book.authors.all %}
+        {{ author.first_name }} {{ author.last_name }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No books available.</p>
+{% endif %}
+{% endblock %}

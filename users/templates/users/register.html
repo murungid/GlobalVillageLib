@@ -1,0 +1,54 @@
+{% extends "users/base.html" %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 90vh;">
+    
+    <div class="card shadow-sm border-0 p-4" style="width: 100%; max-width: 500px;">
+        
+        <h2 class="text-center mb-4 fw-bold">Create Account</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    Please correct the errors below.
+                </div>
+            {% endif %}
+
+            <!-- Username -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Username</label>
+                {{ form.username }}
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Password</label>
+                {{ form.password1 }}
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="mb-4">
+                <label class="form-label fw-semibold">Confirm Password</label>
+                {{ form.password2 }}
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-dark rounded-pill py-2">
+                    Register
+                </button>
+            </div>
+
+            <div class="text-center mt-3">
+                <small>
+                    Already have an account?
+                    <a href="{% url 'login' %}" class="text-decoration-none">Login</a>
+                </small>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+{% endblock %}
