@@ -1,0 +1,14 @@
+{% extends "users/base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <div class="alert alert-danger">
+        <h2>Delete Book</h2>
+        <p>Are you sure you want to delete "{{ category.name }}"?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Confirm Delete</button>
+            <a href="{% url 'book_list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

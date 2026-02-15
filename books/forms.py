@@ -1,5 +1,5 @@
 from django import forms
-from .models import  Book, Category, Member, Bookcopy, BorrowRecord
+from .models import Book, Category, Member, Bookcopy, BorrowRecord
 
 
 class BookForm(forms.ModelForm):
@@ -37,7 +37,9 @@ class MemberForm(forms.ModelForm):
         model = Member
         fields = ["first_name", "last_name", "email", "phone"]
         widgets = {
-            "first_name": forms.TextInput(attrs={"placeholder": "Enter first name"})
+            "first_name": forms.TextInput(attrs={"placeholder": "Enter first name"}),
+            "last_name": forms.TextInput(attrs={"placeholder": "Enter last name"}),
+            "email": forms.EmailInput(attrs={"placeholder": "muru****@gmail.com"}),
         }
 
 

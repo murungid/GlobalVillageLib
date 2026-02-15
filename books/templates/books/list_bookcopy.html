@@ -1,0 +1,44 @@
+{% extends "users/base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Book Copies</h2>
+    <a href="{% url 'add_bookcopy' %}" class="btn btn-success mb-3">
+        Add New Copy
+    </a>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Book</th>
+                <th>Copy Number</th>
+                <th>Status</th>
+                <th>Condition</th>
+                <th>Acquisition Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for copy in bookcopy %}
+            <tr>
+                <td>{{ copy.book.title }}</td>
+                <td>{{ copy.copy_number }}</td>
+                <td>
+                    <span class="badge 
+                        {% if copy.status == 'available' %}bg-success
+                        {% elif copy.status == 'borrowed' %}bg-warning
+                        {% elif copy.status == 'reserved' %}bg-info
+                        {% else %}bg-danger{% endif %}">
+                        {{ copy.status }}
+                    </span>
+                </td>
+                <td>{{ copy.condition }}</td>
+                <td>{{ copy.acquisition_date|date:"Y-m-d" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">No book copies found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
